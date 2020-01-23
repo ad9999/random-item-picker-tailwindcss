@@ -55,6 +55,11 @@ function App() {
     setItems(newItems);
   };
 
+  const removeItem = (i) => {
+    const newItems = items.filter((_, idx) => idx !== i);
+    setItems(newItems);
+  }
+
   return (
     <div className="bg-white container mx-auto shadow-lg w-2/4 sm:w-full p-10 bg-gray-300">
       <form onSubmit={handleSubmit} className="flex">
@@ -70,19 +75,26 @@ function App() {
       </form>
       <ul>
         {items.map((item, idx) => (
-            <li className={`my-5 p-1  ${ item.selected ? 'bg-orange-500 text-white' : '' }`} key={idx}>
+            <li 
+            onDoubleClick={() => removeItem(idx)}
+              className={`cursor-pointer hover:bg-orange-500 my-5 p-1  ${ item.selected ? 'bg-orange-500 text-white' : '' }`} 
+              key={idx}>
               {item.text}
+              
             </li>
         ))}
       </ul>
 
       {items.length > 0 && (
-        <button 
-          className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4"
-          onClick={randomize}
-        >
-          Randomize
-        </button>
+        <>
+          <small>* double click to remove</small>
+          <button 
+            className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4"
+            onClick={randomize}
+          >
+            Randomize
+          </button>
+        </>
       )}  
       
     </div>
