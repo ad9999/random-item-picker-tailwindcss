@@ -1,33 +1,21 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const defItems = [
-  {
-    text: 'Item 1',
-    selected: false
-  },
-  {
-    text: 'Item 2',
-    selected: false
-  },
-  {
-    text: 'Item 3',
-    selected: false
-  },
-  {
-    text: 'Item 4',
-    selected: false
-  },
-  {
-    text: 'Item 5',
-    selected: true
-  },
-];
+const defItems = JSON.parse(localStorage.getItem('items')) || [];
+
+const setToStorage = items => {
+  localStorage.setItem('items', JSON.stringify(items));
+}
 
 function App() {
   const [items, setItems] = useState(defItems);
   const [inputValue, setInputValue] = useState('');
   
+  const updateItems = newItems => {
+    setToStorage(newItems);
+    setItems(newItems);
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     if(inputValue !== '') {
@@ -37,9 +25,8 @@ function App() {
       }
       const newItems = [ ...items, newItem];
       setInputValue('');
-      setItems(newItems);  
+      updateItems(newItems);  
     }
-    
   }
 
   const randomize = () => {
@@ -55,12 +42,12 @@ function App() {
         ? { ...item, selected: true } 
         : { ...item, selected: false } 
     );
-    setItems(newItems);
+    updateItems(newItems);
   };
 
   const removeItem = (i) => {
     const newItems = items.filter((_, idx) => idx !== i);
-    setItems(newItems);
+    updateItems(newItems);
   }
 
   return (
