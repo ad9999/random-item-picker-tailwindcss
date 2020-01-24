@@ -30,13 +30,16 @@ function App() {
   
   const handleSubmit = e => {
     e.preventDefault();
-    const newItem = {
-      text: inputValue,
-      selected: false,
+    if(inputValue !== '') {
+      const newItem = {
+        text: inputValue,
+        selected: false,
+      }
+      const newItems = [ ...items, newItem];
+      setInputValue('');
+      setItems(newItems);  
     }
-    const newItems = [ ...items, newItem];
-    setInputValue('');
-    setItems(newItems);
+    
   }
 
   const randomize = () => {
