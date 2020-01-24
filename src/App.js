@@ -51,44 +51,48 @@ function App() {
   }
 
   return (
-    <div className="bg-white container mx-auto shadow-lg w-2/4 sm:w-full p-10 bg-gray-300">
-      <form onSubmit={handleSubmit} className="flex">
-        <input 
-          className="py-2 px-4 border border-gray-500 flex-1" 
-          type="text" 
-          placeholder="Add a new item here"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value) } />
-        <button 
-          className="bg-blue-500 border border-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-        >Add</button>
-      </form>
-      <ul>
-        {items.map((item, idx) => (
-            <li 
-            onDoubleClick={() => removeItem(idx)}
-              className={`select-none cursor-pointer hover:bg-orange-500 my-5 p-1  ${ item.selected ? 'bg-orange-500 text-white' : '' }`} 
-              key={idx}>
-              {item.text}
-              
-            </li>
-        ))}
-      </ul>
-
-      {items.length > 0 && (
-        <>
-          
+    <>
+      <h1 className="text-4xl mb-6">Randomizer</h1>
+      <div className="bg-white container mx-auto shadow-lg w-2/4 sm:w-full p-10 bg-gray-300">
+        <form onSubmit={handleSubmit} className="flex">
+          <input 
+            className="py-2 px-4 border border-gray-500 flex-1" 
+            type="text" 
+            placeholder="Add a new item here"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value) } />
           <button 
-            className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4"
-            onClick={randomize}
-          >
-            Randomize
-          </button>
-          <small classname="mt-3 text-gray-300 inline-block">* double click to remove</small>
-        </>
-      )}  
-      
-    </div>
+            className="bg-blue-500 border border-blue-500 hover:bg-blue-700 text-white py-2 px-4"
+          >Add</button>
+        </form>
+        <ul>
+          {items.map((item, idx) => (
+              <li 
+              onDoubleClick={() => removeItem(idx)}
+                className={`select-none cursor-pointer hover:bg-orange-500 my-5 p-1  ${ item.selected ? 'bg-orange-500 text-white' : '' }`} 
+                key={idx}>
+                {item.text}
+                
+              </li>
+          ))}
+        </ul>
+
+        {items.length > 0 && (
+          <>
+            
+            <button 
+              className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4"
+              onClick={randomize}
+            >
+              Randomize
+            </button>
+            <small classname="mt-3 text-gray-300 inline-block">* double click to remove</small>
+          </>
+        )}  
+        
+      </div>
+    </>
+    
   );
 }
 
