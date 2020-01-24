@@ -77,7 +77,7 @@ function App() {
         {items.map((item, idx) => (
             <li 
             onDoubleClick={() => removeItem(idx)}
-              className={`cursor-pointer hover:bg-orange-500 my-5 p-1  ${ item.selected ? 'bg-orange-500 text-white' : '' }`} 
+              className={`select-none cursor-pointer hover:bg-orange-500 my-5 p-1  ${ item.selected ? 'bg-orange-500 text-white' : '' }`} 
               key={idx}>
               {item.text}
               
@@ -87,13 +87,14 @@ function App() {
 
       {items.length > 0 && (
         <>
-          <small>* double click to remove</small>
+          
           <button 
             className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4"
             onClick={randomize}
           >
             Randomize
           </button>
+          <small classname="mt-3 text-gray-300 inline-block">* double click to remove</small>
         </>
       )}  
       
